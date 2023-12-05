@@ -39,3 +39,6 @@ print('---------------')
 #     print('/'.join(seg_list))
 
 
+# 詞頻
+counter = Counter(seg_list).most_common(100)
+print(counter)
