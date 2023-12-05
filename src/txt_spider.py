@@ -5,6 +5,7 @@ from collections import Counter # 次數統計模組
 
 from PIL import Image           # 圖片處理模組
 import jieba                    # 分詞模組
+import re                       # 正則表達示
 import matplotlib.pyplot as plt # 視覺化模組
 import wordcloud                # 文字雲模組
 
