@@ -14,12 +14,16 @@ with open('spider_zonggui_previous.txt', 'r', encoding='utf-8') as f:
     print(data)
     print('------------------')
 
+
+
 # 定義繁體中文檔名
 WORDS_PATH = 'dict.txt.big.txt' # 繁體中文詞庫檔名
 TC_FONT_PATH = 'NotoSansTC-Regular.otf' # 繁體中文字型檔名
 
 
+
 # jieba斷詞
+
 # 精確模式
 # for sentence in data:
 seg_list = jieba.lcut(data)
@@ -40,6 +44,25 @@ print('---------------')
 #     print('/'.join(seg_list))
 
 
+
+# 使用正則表示式提取資訊（書名）
+pattern = r"\《(.*?)\》"
+matches = re.findall(pattern, data)
+
+# 輸出提取到的資訊
+print("提取到的括號內的資訊：", matches)
+
+
+
 # 詞頻
-counter = Counter(seg_list).most_common(100)
+
+# 總覽
+counter = Counter(matches)
 print(counter)
+
+# 前幾名
+# most_counter = Counter(seg_list).most_common(100)
+# print(most_counter)
+
+
+
