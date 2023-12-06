@@ -22,7 +22,13 @@ TC_FONT_PATH = 'NotoSansTC-Regular.otf' # 繁體中文字型檔名
 
 
 
-# jieba斷詞
+# 切換 jieba 繁體中文詞庫
+
+jieba.set_dictionary(WORDS_PATH)
+
+
+
+# jieba 斷詞
 
 # 精確模式
 # for sentence in data:
