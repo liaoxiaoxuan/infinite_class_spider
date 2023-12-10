@@ -18,7 +18,7 @@ with open('spider_zonggui_previous.txt', 'r', encoding='utf-8') as f:
 
 # 定義繁體中文檔名
 WORDS_PATH = 'dict.txt.big.txt' # 繁體中文詞庫檔名
-TC_FONT_PATH = './NotoSansTC-Regular.otf' # 繁體中文字型檔名
+TC_FONT_PATH = './NotoSerifTC-Regular.otf' # 繁體中文字型檔名
 
 
 
@@ -71,7 +71,7 @@ most_counter = Counter(seg_list).most_common(100)  # 出來的結果會是 list
 most_counter_dict = {_[0]:_[1] for _ in most_counter}  # 轉換成dict
 print(most_counter_dict)
 
-STOP_WORDS = [' ', '，', '（', '）', '...', '。', '「', '」', '[', ']', '\n']
+STOP_WORDS = [' ', '，', '（', '）', '...', '。', '「', '」', '[', ']', '\n','《','》','〔','〕']
 [most_counter_dict.pop(x, None) for x in STOP_WORDS] # 從字典裡刪除停用詞
 print(most_counter_dict) # 把計算完的每個分詞出現次數顯示出來看看
 
