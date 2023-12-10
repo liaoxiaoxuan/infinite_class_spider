@@ -18,13 +18,13 @@ with open('spider_zonggui_previous.txt', 'r', encoding='utf-8') as f:
 
 # 定義繁體中文檔名
 WORDS_PATH = 'dict.txt.big.txt' # 繁體中文詞庫檔名
-TC_FONT_PATH = 'NotoSansTC-Regular.otf' # 繁體中文字型檔名
+TC_FONT_PATH = './NotoSansTC-Regular.otf' # 繁體中文字型檔名
 
 
 
-# 切換 jieba 繁體中文詞庫
+# # 切換 jieba 繁體中文詞庫
 
-jieba.set_dictionary(WORDS_PATH)
+# jieba.set_dictionary(WORDS_PATH)
 
 
 
@@ -33,7 +33,7 @@ jieba.set_dictionary(WORDS_PATH)
 # 精確模式
 # for sentence in data:
 seg_list = jieba.lcut(data)
-print('/'.join(seg_list))
+# print('/'.join(seg_list))
 
 print('---------------')
 
@@ -56,19 +56,40 @@ pattern = r"\《(.*?)\》"
 matches = re.findall(pattern, data)
 
 # 輸出提取到的資訊
-print("提取到的括號內的資訊：", matches)
+# print("提取到的括號內的資訊：", matches)
 
 
 
 # 詞頻
 
-# 總覽
-counter = Counter(matches)
-print(counter)
+# # 總覽
+# counter = Counter(matches)
+# print(counter)
 
 # 前幾名
-# most_counter = Counter(seg_list).most_common(100)
-# print(most_counter)
+most_counter = Counter(seg_list).most_common(100)  # 出來的結果會是 list
+most_counter_dict = {_[0]:_[1] for _ in most_counter}  # 轉換成dict
+print(most_counter_dict)
 
+STOP_WORDS = [' ', '，', '（', '）', '...', '。', '「', '」', '[', ']', '\n']
+[most_counter_dict.pop(x, None) for x in STOP_WORDS] # 從字典裡刪除停用詞
+print(most_counter_dict) # 把計算完的每個分詞出現次數顯示出來看看
 
+# 文字雲
 
+# 文字雲格式設定
+wc = wordcloud.WordCloud(background_color='white',
+                        margin=2, # 文字間距
+                        font_path=TC_FONT_PATH, # 設定字體
+                        max_words=200, # 取多少文字在裡面
+                        width=1280, height=720) # 解析度
+# wc = wordcloud.WordCloud()
+                         
+# 生成文字雲
+wc.generate_from_frequencies(most_counter_dict) # 吃入次數字典資料
+
+# 產生圖檔
+wc.to_file('./book.png')
+
+# 顯示文字雲圖片
+plt.imshow(wc)
