@@ -67,13 +67,16 @@ matches = re.findall(pattern, data)
 # print(counter)
 
 # 前幾名
-most_counter = Counter(seg_list).most_common(100)  # 出來的結果會是 list
-most_counter_dict = {_[0]:_[1] for _ in most_counter}  # 轉換成dict
+most_counter_dict = Counter(matches)  # 出來的結果會是 dict
+# most_counter_list = Counter(matches).most_common(100)  # 出來的結果會是 list
+# most_counter_dict = {_[0]:_[1] for _ in most_counter_list}  # 轉換成 dict
 print(most_counter_dict)
 
 STOP_WORDS = [' ', '，', '（', '）', '...', '。', '「', '」', '[', ']', '\n','《','》','〔','〕']
 [most_counter_dict.pop(x, None) for x in STOP_WORDS] # 從字典裡刪除停用詞
 print(most_counter_dict) # 把計算完的每個分詞出現次數顯示出來看看
+
+
 
 # 文字雲
 
