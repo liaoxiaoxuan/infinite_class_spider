@@ -105,5 +105,14 @@ plt.imshow(wc)
 
 # 圖表
 
-# 長條圖
 
+# 長條圖
+plt.bar(top_words.keys(), top_words.values())
+
+# 添加標題和標籤
+plt.title('Top {} Words in the Text'.format(N))
+plt.xlabel('Words')
+plt.ylabel('Frequency')
+
+# 顯示圖表
+plt.show()
