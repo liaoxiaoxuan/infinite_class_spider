@@ -76,6 +76,10 @@ STOP_WORDS = [' ', '，', '（', '）', '...', '。', '「', '」', '[', ']', '\
 [most_counter_dict.pop(x, None) for x in STOP_WORDS] # 從字典裡刪除停用詞
 print(most_counter_dict) # 把計算完的每個分詞出現次數顯示出來看看
 
+# 取前 N 個詞頻最高的詞
+N = 20
+top_words = dict(most_counter_dict.most_common(N))
+
 
 
 # 文字雲
@@ -96,3 +100,10 @@ wc.to_file('./book.png')
 
 # 顯示文字雲圖片
 plt.imshow(wc)
+
+
+
+# 圖表
+
+# 長條圖
+
