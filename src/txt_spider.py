@@ -7,6 +7,7 @@ from PIL import Image           # 圖片處理模組
 import jieba                    # 分詞模組
 import re                       # 正則表達示
 import matplotlib.pyplot as plt # 視覺化模組
+from matplotlib.font_manager import FontProperties  # 導入 FontProperties 類別，用於設置字體相關屬性
 import wordcloud                # 文字雲模組
 
 with open('spider_zonggui_previous.txt', 'r', encoding='utf-8') as f:
@@ -19,6 +20,14 @@ with open('spider_zonggui_previous.txt', 'r', encoding='utf-8') as f:
 # 定義繁體中文檔名
 WORDS_PATH = 'dict.txt.big.txt' # 繁體中文詞庫檔名
 TC_FONT_PATH = './NotoSerifTC-Regular.otf' # 繁體中文字型檔名
+
+# 匯入圖表中文字體
+font_path = "./NotoSerifTC-Regular.otf"  # 替換為實際的中文字體文件路徑
+font_prop = FontProperties(fname=font_path)
+
+# # 設定中文字體
+# font_path = r"D:\PYTHON\infinite_class_spider\src\NotoSerifSC-Regular.otf"  # 替換為實際的中文字體文件路徑
+# font_prop = FontProperties(fname=font_path)
 
 
 
@@ -82,37 +91,53 @@ top_words = dict(most_counter_dict.most_common(N))
 
 
 
-# 文字雲
+# # 文字雲
 
-# 文字雲格式設定
-wc = wordcloud.WordCloud(background_color='white',
-                        margin=2, # 文字間距
-                        font_path=TC_FONT_PATH, # 設定字體
-                        max_words=200, # 取多少文字在裡面
-                        width=1280, height=720) # 解析度
-# wc = wordcloud.WordCloud()
+# # 文字雲格式設定
+# wc = wordcloud.WordCloud(background_color='white',
+#                         margin=2, # 文字間距
+#                         font_path=TC_FONT_PATH, # 設定字體
+#                         max_words=200, # 取多少文字在裡面
+#                         width=1280, height=720) # 解析度
+# # wc = wordcloud.WordCloud()
                          
-# 生成文字雲
-wc.generate_from_frequencies(most_counter_dict) # 吃入次數字典資料
+# # 生成文字雲
+# wc.generate_from_frequencies(most_counter_dict) # 吃入次數字典資料
 
-# 產生圖檔
-wc.to_file('./book.png')
+# # 產生圖檔
+# wc.to_file('./book_wc.png')
 
-# 顯示文字雲圖片
-plt.imshow(wc)
+# # 顯示文字雲圖片
+# plt.imshow(wc)
 
 
 
 # 圖表
 
+# 設定 Matplotlib 使用的默認字體，注意替換為支援中文的字體路徑
+plt.rcParams['font.sans-serif'] = ['SimHei']  # 使用中文黑體
+plt.rcParams['axes.unicode_minus'] = False  # 解決負號顯示問題
 
 # 長條圖
 plt.bar(top_words.keys(), top_words.values())
 
-# 添加標題和標籤
-plt.title('Top {} Words in the Text'.format(N))
-plt.xlabel('Words')
-plt.ylabel('Frequency')
+# 在每個 bar 頂部添加頻率次數
+for x, y in zip(top_words.keys(), top_words.values()):
+    plt.text(x, y + 0.05, str(y), ha='center', va='bottom', fontproperties=font_prop)
+
+# # 添加標題和標籤
+# plt.title('Top {} Words in the Text'.format(N))
+# plt.xlabel('Words')
+# plt.ylabel('Frequency')
+
+# 添加中文標題和標籤
+# plt.bar(data.keys(), data.values())
+plt.title('前 20 名詩話來源', fontproperties=font_prop)  # 使用中文字體
+plt.xlabel('詩話', fontproperties=font_prop)  # 使用中文字體
+plt.ylabel('頻率', fontproperties=font_prop)  # 使用中文字體
+
+# 產生圖檔
+plt.savefig('./book_plt.png', format='png')
 
 # 顯示圖表
 plt.show()
