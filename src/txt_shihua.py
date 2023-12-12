@@ -13,10 +13,11 @@ import wordcloud                # 文字雲模組
 
 
 # 匯入 data
-with open('spider_zonggui_previous.txt', 'r', encoding='utf-8') as f:
-    data = f.read()
-    print(data)
-    print('------------------')
+file_path = 'spider_zonggui_previous.txt'
+with open(file_path, "r", encoding="utf-8") as file:
+    data = file.read()
+    # print(data)
+    # print('------------------')
 
 
 
