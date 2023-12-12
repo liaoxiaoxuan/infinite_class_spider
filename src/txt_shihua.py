@@ -12,7 +12,7 @@ import wordcloud                # 文字雲模組
 
 
 
-# 匯入data
+# 匯入 data
 with open('spider_zonggui_previous.txt', 'r', encoding='utf-8') as f:
     data = f.read()
     print(data)
