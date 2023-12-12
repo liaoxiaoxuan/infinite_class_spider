@@ -10,6 +10,9 @@ import matplotlib.pyplot as plt # 視覺化模組
 from matplotlib.font_manager import FontProperties  # 導入 FontProperties 類別，用於設置字體相關屬性
 import wordcloud                # 文字雲模組
 
+
+
+# 匯入data
 with open('spider_zonggui_previous.txt', 'r', encoding='utf-8') as f:
     data = f.read()
     print(data)
