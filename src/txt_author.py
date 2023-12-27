@@ -45,7 +45,7 @@ lm = load_lm('../static/jiayan_models/jiayan_models/jiayan.klm')
 tokenizer = CharHMMTokenizer(lm)
 
 # 顯示分詞結果
-print(list(tokenizer.tokenize(text)))
+print(list(tokenizer.tokenize(data)))
 
 
 # # 進行句法分析
